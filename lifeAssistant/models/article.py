@@ -7,7 +7,7 @@
     文章的model类
 """
 
-from extension import mongodb
+from lifeAssistant.extension import mongodb
 
 
 class Article(mongodb.Document):

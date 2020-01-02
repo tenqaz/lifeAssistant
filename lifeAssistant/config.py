@@ -6,7 +6,7 @@
 @desc:  
 """
 
-from libs.mongo_flask import MongoEncoder
+from lifeAssistant.libs.mongo_flask import MongoEncoder
 
 MONGODB_SETTINGS = {
     "db": "lifeAssistant",

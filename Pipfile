@@ -10,6 +10,7 @@ pytest = "*"
 flask = "*"
 pymongo = "*"
 flask-mongoengine = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.7"

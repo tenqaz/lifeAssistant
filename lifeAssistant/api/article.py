@@ -9,8 +9,8 @@
 from flask import jsonify, request
 from flask.blueprints import Blueprint
 
-from libs.mongo_flask import MongoEncoder
-from models.article import Article
+from lifeAssistant.libs.mongo_flask import MongoEncoder
+from lifeAssistant.models.article import Article
 
 bp = Blueprint("article", __name__, url_prefix="/article")
 bp.json_encoder = MongoEncoder
