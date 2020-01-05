@@ -13,7 +13,7 @@ from lifeAssistant.extension import mongodb
 class Article(mongodb.Document):
     category = mongodb.StringField()
     category2 = mongodb.StringField()
-    title = mongodb.StringField()
+    header = mongodb.StringField()
     content = mongodb.StringField()
     publisher = mongodb.StringField()
     publisher_time = mongodb.StringField()

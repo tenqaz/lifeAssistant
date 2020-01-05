@@ -18,7 +18,7 @@ bp.json_encoder = MongoEncoder
 
 @bp.route("/", methods=("GET",))
 def article_list():
-    query = Article.objects
+    query = Article.objects.exclude("content")
 
     # category 条件
     category_filter = request.args.get("category", None)
@@ -30,12 +30,16 @@ def article_list():
     per_page = int(request.args.get("per_page", 10))
     results = query.paginate(page=page, per_page=per_page)
 
-    return jsonify(results.items)
+    return jsonify({
+        "code": 0,
+        "msg": "success",
+        "data": results.items
+    })
 
 
 @bp.route("/<id>/", methods=("GET",))
 def article(id: str):
-    instance = Article.objects.get_or_404(id=id)
+    instance = Article.objects.only("content").get_or_404(id=id)
 
     return jsonify({
         "code": 0,

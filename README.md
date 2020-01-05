@@ -21,7 +21,6 @@
     "msg": "success",  
     "data": [{
         "_id": "",
-        "content": "",  // 内容
         "category": "",   // 分类
         "category2": "",   // 分类2 
         "title": "",    // 标题
@@ -30,7 +29,6 @@
         "create_time": "",  //创建时间
     },{
         "_id": "",
-        "content": "",  // 内容
         "category": "",   // 分类
         "category2": "",   // 分类2 
         "title": "",    // 标题
@@ -54,12 +52,6 @@
   data: {
     "_id": "",
     "content": "",  // 内容
-    "category": "",   // 分类
-    "category2": "",   // 分类2 
-    "title": "",    // 标题
-    "publisher": "", //发布者
-    "publish_time": "",  //发布时间
-    "create_time": "",  //创建时间
   }
 }
 ```

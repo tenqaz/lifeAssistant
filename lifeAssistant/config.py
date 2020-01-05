@@ -15,7 +15,7 @@ FLASK_ENV = os.getenv("FLASK_ENV")
 if FLASK_ENV == 'development':
     MONGODB_SETTINGS = {
         "db": "lifeAssistant",
-        "host": "192.168.0.206",
+        "host": "127.0.0.1",
         "port": 27017
     }
 else:
