@@ -11,6 +11,11 @@ flask = "*"
 pymongo = "*"
 flask-mongoengine = "*"
 python-dotenv = "*"
+requests = "*"
+beautifulsoup4 = "*"
+arrow = "*"
+lxml = "*"
+flask-restful = "*"
 
 [requires]
 python_version = "3.7"

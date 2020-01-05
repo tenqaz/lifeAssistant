@@ -8,7 +8,7 @@
 
 from flask import Flask
 from lifeAssistant.extension import mongodb
-from lifeAssistant.api.article import bp
+from lifeAssistant.api.article import bp as article_bp
 
 
 def register_plugin(app):
@@ -34,7 +34,7 @@ def register_blueprint(app):
     Returns:
 
     """
-    app.register_blueprint(bp)
+    app.register_blueprint(article_bp)
 
 
 def create_app():
