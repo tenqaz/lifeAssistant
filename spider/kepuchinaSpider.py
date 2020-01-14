@@ -77,16 +77,17 @@ def get_page_url(category_url: Dict):
                 "body > div > div.content > div.layout-right-cont > div > div.layoutLeft > div > div")
             for page in page_list:
                 # 保存图片
-                img_url = url + page.a.img.get("src", None)
-                resp_img = requests.get(img_url, headers=headers)
-                img = resp_img.content
+                img_url = url+ "/" + page.a.img.get("src", None)
+                if img_url:
+                    resp_img = requests.get(img_url, headers=headers)
+                    img = resp_img.content
 
-                suffix = os.path.splitext(img_url)[1]
-                img_id = uuid.uuid4().hex
-                img_name = "{}{}".format(img_id, suffix)
-                header_img = "{}/{}".format(IMG_PATH, img_name)
-                with open(header_img, "wb") as f:
-                    f.write(img)
+                    suffix = os.path.splitext(img_url)[1]
+                    img_id = uuid.uuid4().hex
+                    img_name = "{}{}".format(img_id, suffix)
+                    header_img = "{}/{}".format(IMG_PATH, img_name)
+                    with open(header_img, "wb") as f:
+                        f.write(img)
 
                 yield (category, url + page.a['href'][1:], img_name)
 
