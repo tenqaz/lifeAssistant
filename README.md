@@ -81,6 +81,8 @@
         "publisher_time": "",  //发布时间
         "create_time": "",  //创建时间
         "header_img": "",  //上传图片
+        "type": 1,        // 上传类型. 0爬虫上传. 1手动上传
+        "click_num": 1,   // 点击数
     },{
         "_id": "",
         "category": "",   // 分类
@@ -90,6 +92,8 @@
         "publisher_time": "",  //发布时间
         "create_time": "",  //创建时间
         "header_img": "",  //上传图片
+        "type": 1,        // 上传类型. 0爬虫上传. 1手动上传
+        "click_num": 1,   // 点击数
     },
     ]
 }

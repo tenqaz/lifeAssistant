@@ -30,6 +30,9 @@ class ArticleApi(Resource):
     def get(self, id: str):
         instance = Article.objects.only("content").get_or_404(id=id)
 
+        # 点击数
+        instance.update(inc__click_num=1)
+
         return jsonify({
             "code": 0,
             "msg": "success",
