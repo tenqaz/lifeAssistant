@@ -14,6 +14,11 @@ from bs4 import BeautifulSoup
 from typing import List, Dict, Any
 import arrow
 from spider.mongodbClient import MongodbClient
+from lifeAssistant.config import IMG_PATH, MONGODB_SETTINGS
+from lifeAssistant.enums import ArticleTypeEnum
+import os
+
+import uuid
 
 index_url = "https://www.kepuchina.cn"
 headers = {
@@ -55,6 +60,7 @@ def get_page_url(category_url: Dict):
         category_url: {category: url}
 
     Returns:
+        一级分类名, 文章url，图片名称.
 
     """
 
@@ -70,7 +76,19 @@ def get_page_url(category_url: Dict):
             page_list = soup.select(
                 "body > div > div.content > div.layout-right-cont > div > div.layoutLeft > div > div")
             for page in page_list:
-                yield (category, url + page.a['href'][1:])
+                # 保存图片
+                img_url = url + page.a.img.get("src", None)
+                resp_img = requests.get(img_url, headers=headers)
+                img = resp_img.content
+
+                suffix = os.path.splitext(img_url)[1]
+                img_id = uuid.uuid4().hex
+                img_name = "{}{}".format(img_id, suffix)
+                header_img = "{}/{}".format(IMG_PATH, img_name)
+                with open(header_img, "wb") as f:
+                    f.write(img)
+
+                yield (category, url + page.a['href'][1:], img_name)
 
 
 def get_page_content(url: str) -> Dict[str, str]:
@@ -92,29 +110,39 @@ def get_page_content(url: str) -> Dict[str, str]:
         # with open("tmp.txt", "w", encoding="utf8e") as f:
         #     f.write(text)
         soup = BeautifulSoup(text, "lxml")
-        data['header'] = soup.select("body > div.content_main > div.content_left > div.heading > div > table > tr > td:nth-child(2) > h1")[0].string
-        data['publisher'] = soup.select("body > div.content_main > div.content_left > div.heading > div > table > tr > td:nth-child(2) > p > span:nth-child(1)")[0].string
-        data['publisher_time'] = soup.select("body > div.content_main > div.content_left > div.heading > div > table > tr > td:nth-child(2) > p > span:nth-child(2)")[0].string
+        data['header'] = soup.select(
+            "body > div.content_main > div.content_left > div.heading > div > table > tr > td:nth-child(2) > h1")[
+            0].string
+        data['publisher'] = soup.select(
+            "body > div.content_main > div.content_left > div.heading > div > table > tr > td:nth-child(2) > p > span:nth-child(1)")[
+            0].string
+        data['publisher_time'] = soup.select(
+            "body > div.content_main > div.content_left > div.heading > div > table > tr > td:nth-child(2) > p > span:nth-child(2)")[
+            0].string
         content_tag = soup.select("body > div.content_main > div.content_left > div.content_detail > div")[0]
         content = ""
         for p_tag in content_tag:
             if p_tag.string:
-                content += p_tag.string.strip()+"\n"
+                content += p_tag.string.strip() + "\n"
 
         data['content'] = content
 
-        return data
+    return data
+
 
 if __name__ == '__main__':
     category_url: Dict = get_category()
 
     page_urls = get_page_url(category_url)
 
-    for category, url in page_urls:
+    for category, url, header_img in page_urls:
         # url = "https://www.kepuchina.cn/tech/info/201912/t20191227_1178163.shtml"
         rst = get_page_content(url)
         rst['category'] = category
+        rst['header_img'] = header_img
         rst['create_time'] = arrow.now().format("YYYY-MM-DD HH:mm:ss")
-        with MongodbClient("lifeAssistant") as client:
+        rst['type'] = ArticleTypeEnum.SpiderKind.value
+        with MongodbClient(MONGODB_SETTINGS['db'],
+                           "{}:{}".format(MONGODB_SETTINGS['host'], MONGODB_SETTINGS['port'])) as client:
             client.select("article")
             client.insert_one(rst)

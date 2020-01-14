@@ -11,11 +11,11 @@ from lifeAssistant.libs.mongo_flask import MongoEncoder
 import os
 
 # 根据当前环境选择配置
-FLASK_ENV = os.getenv("FLASK_ENV")
+FLASK_ENV = os.getenv("FLASK_ENV", 'development')
 if FLASK_ENV == 'development':
     MONGODB_SETTINGS = {
         "db": "lifeAssistant",
-        "host": "127.0.0.1",
+        "host": "192.168.0.206",
         "port": 27017
     }
 else:
@@ -26,3 +26,6 @@ else:
     }
 
 JSON_AS_ASCII = False
+
+# 图片存储路径
+IMG_PATH = "/resource/lifeAssistant_images"

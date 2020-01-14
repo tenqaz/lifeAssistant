@@ -17,4 +17,6 @@ class Article(mongodb.Document):
     content = mongodb.StringField()
     publisher = mongodb.StringField()
     publisher_time = mongodb.StringField()
+    header_img = mongodb.StringField()  # 封面图片. 名称
+    type = mongodb.IntField()  # 存储方式. 0：爬虫存储. 1: 手动上传存储
     create_time = mongodb.StringField()
