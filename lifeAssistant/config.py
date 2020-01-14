@@ -6,8 +6,6 @@
 @desc:  
 """
 
-from lifeAssistant.libs.mongo_flask import MongoEncoder
-
 import os
 
 # 根据当前环境选择配置

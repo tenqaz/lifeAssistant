@@ -18,7 +18,6 @@ from werkzeug.utils import secure_filename
 from lifeAssistant.enums import ArticleTypeEnum
 from lifeAssistant.libs.mongo_flask import MongoEncoder
 from lifeAssistant.models.article import Article
-import os
 
 bp = Blueprint("article", __name__, url_prefix="/article")
 bp.json_encoder = MongoEncoder

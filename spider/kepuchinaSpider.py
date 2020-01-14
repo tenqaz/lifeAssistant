@@ -8,17 +8,17 @@
     爬取科普中国的数据
 """
 
+import os
+import uuid
+from typing import Dict
+
+import arrow
 import requests
 from bs4 import BeautifulSoup
 
-from typing import List, Dict, Any
-import arrow
-from spider.mongodbClient import MongodbClient
 from lifeAssistant.config import IMG_PATH, MONGODB_SETTINGS
 from lifeAssistant.enums import ArticleTypeEnum
-import os
-
-import uuid
+from spider.mongodbClient import MongodbClient
 
 index_url = "https://www.kepuchina.cn"
 headers = {
