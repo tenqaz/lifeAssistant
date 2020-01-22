@@ -16,6 +16,7 @@ beautifulsoup4 = "*"
 arrow = "*"
 lxml = "*"
 flask-restful = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.7"

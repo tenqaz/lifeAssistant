@@ -9,6 +9,7 @@
 from flask import Flask
 from lifeAssistant.extension import mongodb
 from lifeAssistant.api.article import bp as article_bp
+from flask_cors import CORS
 
 
 def register_plugin(app):
@@ -39,6 +40,7 @@ def register_blueprint(app):
 
 def create_app():
     app = Flask("lifeAssistant")
+    CORS(app, supports_credentials=True)
 
     app.config.from_object("lifeAssistant.config")
 

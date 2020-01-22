@@ -80,7 +80,7 @@ class ArticlesApi(Resource):
 
         # 文件上传
         img_file = request.files.get("header_img", None)
-        print(img_file.filename)
+
         if img_file and self.allowed_file(img_file.filename):
             filename = secure_filename(img_file.filename)
             img_name = uuid.uuid4().hex

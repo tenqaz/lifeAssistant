@@ -60,6 +60,12 @@
               "type": "DateTime",
               "remark": "",
               "chnname": "create_time"
+            },
+            {
+              "name": "点击数",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "click_num"
             }
           ],
           "indexs": [],
@@ -113,7 +119,16 @@
         }
       ],
       "graphCanvas": {
-        "nodes": [],
+        "nodes": [
+          {
+            "shape": "table",
+            "title": "models",
+            "moduleName": false,
+            "x": 350,
+            "y": 250,
+            "id": "c60db16e"
+          }
+        ],
         "edges": []
       },
       "associations": []
