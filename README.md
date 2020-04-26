@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/tenqaz/lifeassistant/badge)](https://www.codefactor.io/repository/github/tenqaz/lifeassistant)
+
 ### 简介
 
 生活助手
